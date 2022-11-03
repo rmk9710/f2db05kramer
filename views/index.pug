@@ -2,4 +2,14 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Hello World! 
+  button(type="button", onclick="dobump()", class="btn btn-secondary") Left
+  div(id="bump") Bump the count
+  script.
+    var count = 0
+    var bumps = 1
+    function dobump() {
+      bumps+=1
+      count+=1
+      document.getElementById("bump").innerhtml = "Count"+count+"with bump"+bumps
+    }
