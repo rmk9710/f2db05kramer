@@ -5,10 +5,21 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// Connecting to Atlas Mogno DB
+require('dotenv').config();
+const connectionString = 
+process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString, 
+{useNewUrlParser: true,
+useUnifiedTopology: true});
+
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 var onion = require('./routes/onion');
 var gridbuild = require('./routes/gridbuild');
+var resource = require('./contollers/resource');
 
 var app = express();
 
@@ -28,6 +39,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/onion', onion);
 app.use('/gridbuild', gridbuild);
+app.use('/resource', resource)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
