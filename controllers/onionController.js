@@ -1,42 +1,49 @@
 var onion= require('../models/onionSchema');
 
-// List of all Costumes
+// List of all Onions
 
-exports.costume_list = async function(req, res) {
+exports.onion_list = async function(req, res) {
     res.send('NOT IMPLEMENTED: Onion list');
 };
-// for a specific Costume.
-exports.onion_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Onion detail: ' + req.params.id);
+// for a specific Onion.
+exports.onion_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        result = await Onion.finbByid(req.params.id)
+        res.send(resuslt)
+    } catch(error) {
+        res.status(500)
+        res.send('{"error": document for id $ {req.params.id} not found');
+    }
 };
 
-// Handle Costume create on POST.
+// Handle Onion create on POST.
 exports.onion_create_post = async function(req, res) {
-    console.log(req.body)
-    let document = new Onion();
-    // We are looking for a body, since POST does not have query parameters.
-    // Even though bodies can be in many different formats, we will be picky
-    // and require that it be a json object
-    // {"Onion_type":"cost":12, "size":small, "collor":"yellow"}
-    document.onion_cost = req.body.onion_cost;
-    document.cost = req.body.size;
-    document.size = req.body.color;
-    try{
-        let result = await document.save();
-        res.send(result);
-    }
-    catch(err){
-        res.status(500);
-        res.send(`{"error": ${err}}`);
-    }
+    console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+ try {
+ let toUpdate = await Onion.findById( req.params.id)
+ // Do updates of properties
+ if(req.body.onion_type)
+ toUpdate.onion_type = req.body.onion_type;
+ if(req.body.cost) toUpdate.cost = req.body.cost;
+ if(req.body.size) toUpdate.color = req.body.color;
+ let result = await toUpdate.save();
+ console.log("Sucess " + result)
+ res.send(result)
+ } catch (err) {
+ res.status(500)
+ res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+ }
 };
 
-// Handle Costume delete form on DELETE.
+// Handle Onion delete form on DELETE.
 exports.onion_delete = function(req, res) {
     res.send('NOT IMPLEMENTED: Onion delete DELETE ' + req.params.id);
 };
 
-// Handle Costume update form on PUT.
+// Handle Onion update form on PUT.
 exports.onion_update_put = function(req, res) {
     res.send('NOT IMPLEMENTED: Onion update PUT' + req.params.id);
 };
