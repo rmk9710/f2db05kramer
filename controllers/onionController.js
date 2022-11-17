@@ -44,8 +44,17 @@ exports.onion_delete = function(req, res) {
 };
 
 // Handle Onion update form on PUT.
-exports.onion_update_put = function(req, res) {
-    res.send('NOT IMPLEMENTED: Onion update PUT' + req.params.id);
+exports.onion_delete = async function(req, res) {
+    console.log("delete" +req.params.id)
+    try {
+        result = awit Onion.findByIdAndDelete(req.params.id)
+        console.log("Removed" + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send({"error": Error deleting ${err}});
+    }
+    
 };
 // VIEWS
 // Handle a show all view
@@ -59,3 +68,41 @@ exports.onion_view_all_Page = async function(req, res) {
         res.send(`{"error": ${err}}`);
     }  
 };
+
+//Handle a show one view with id specified query
+exports.onion_view_one_Page = async function(req.res) {
+    console.log("single view for id" +req.query.id)
+    res.render('oniondetail',
+    {title: 'Onion Detail'.toShow: result})
+}
+catch(err){
+    res.status(500)
+    res.send('{'error': ${err}'}');
+
+}
+
+//Handle building for creating an onion
+//No body, no in path parameter, no querry
+//Does not need to be async
+exports.onion_create_Page = function(req.res) {
+    console.log("create view")
+    try {
+        res.render('onioncreate', {title:'Onion Create'};)
+    }
+catch(err){
+    res.status(500)
+    res.send('{'error': ${err}'}');
+
+}
+
+//Handle building the view for updating a costume
+//querry provides the id
+exports.onion_update_Page = function(req.res) {
+    console.log("update view for item" +req.query.id)
+    res.render('onionupdate', {title:'Onion Update', toshow: result};)
+    }
+catch(err){
+    res.status(500)
+    res.send('{'error': ${err}'}');
+
+}

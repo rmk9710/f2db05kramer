@@ -1,0 +1,22 @@
+extends layout
+ 
+block content
+  h1= title
+ 
+  - let onionid = toShow._id
+  - let onion_color = toShow.onion_color
+  - let onioncost = toShow.cost
+  - let onionize = toShow.size
+  div
+    div.row
+      div(class='onionAttr mr-3') Onion ID is:
+      div #{costumeid}
+    div.row
+      div(class='onionAttr mr-3') Onion color is:
+      div #{onion_color}
+    div.row
+      div(class='onionAttr mr-3') Onion Size is:
+      div #{onionsize}
+    div.row
+      div(class='onionAttr mr-3') Onion Cost is:
+      div #{onioncost}
