@@ -2,6 +2,23 @@ extends layout
  
 block content
   h1= title
+
+  -let items = results
+  div(class="container_fluid")
+    div(class="row")
+    each item in items 
+      div(class="row-sm-2",class="m-1")Item{item.onion_color}(#{itme.size}) is #{item.cost}
+  div(class="container-fluid")
+    div(class="row m-1")
+      each item in items 
+        - let destination = `dispatch(\"/onion/update?id=${item._id}\")`
+        div(class="row-sm-2", class="m-1") Item #{item.onion_color}(#{item.size}) is #{item.cost}
+          button.btn( class="btn-primary ml-1", onclick= destination) Update
+  
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }
  
   - let onionid = toShow._id
   - let onion_color = toShow.onion_color
