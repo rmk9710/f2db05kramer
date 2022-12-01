@@ -16,7 +16,7 @@ f2db05kramer start
 async function recreateDB(){
   // De Costume.deleteMany();
   let instance1 = new
-Onion({onion_cost:2.5,  size:'small',
+Onion({onion_cost:2.5,  size:'small', 
 color:"yellow"});
 let everything
   await  instance1.save( function(err,doc) {
