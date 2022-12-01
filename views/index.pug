@@ -1,16 +1,11 @@
 extends layout
-
 block content
-  h1= title
-  p Hello World! 
-  button(type="button", onclick="dobump()", class="btn btn-secondary") Left
-  div(id="bump") Bump the count
-  script.
-    var count = 0
-    var bumps = 1
-    function dobump() {
-      bumps+=1
-      count+=1
-      document.getElementById("bump").innerhtml = "Count"+count+"with bump"+bumps
-    }
-    a(href="./routes/onion") 
+ if (!user)
+ a(href="/login") Login
+ br
+ a(href="/register") Register
+ if (user)
+ p You are currently logged in as #{user.username}
+ a(href="/onion") Take me to costumes
+ br
+ a(href="/logout") Logout
